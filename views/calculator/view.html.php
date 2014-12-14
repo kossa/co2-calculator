@@ -26,16 +26,6 @@ class Co2ViewCalculator extends JViewLegacy {
         $doc = JFactory::getDocument();
         $user = JFactory::getUser();
 
-        // Add CSS file
-        $doc->addStyleSheet(COMPONENT_URL . "assets/css/mb.slider.css");
-        $doc->addStyleSheet(COMPONENT_URL . "assets/css/calculator.css");
-
-        // Add JS file
-        $doc->addScript(COMPONENT_URL . "assets/js/jquery.js");
-        $doc->addScript(COMPONENT_URL . "assets/js/jquery.metadata.js");
-        $doc->addScript(COMPONENT_URL . "assets/js/jquery.mb.slider.js");
-        $doc->addScript(COMPONENT_URL . "assets/js/calculator.js");
-
         parent::display($tpl);
     }
 
