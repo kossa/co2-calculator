@@ -1,0 +1,493 @@
+{
+    "car": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2*data3",
+            "kw": "set*data1*data3*data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 7.2,
+            "data2": 2.47,
+            "data3": 0.01,
+            "data4": 10,
+            "data5": 10,
+            "data6": 0.25
+        }
+    },
+    "airplane": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2*data3",
+            "kw": "set*data1*data3*data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 4.2,
+            "data2": 2.5,
+            "data3": 0.01,
+            "data4": 10,
+            "data5": 10,
+            "data6": 0.25
+        }
+    },
+    "public-transport": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2*data3*data4*data0",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 20,
+            "data2": 30,
+            "data3": 0.0166666,
+            "data4": 0.001,
+            "data0": 220,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "walk": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2*data3*data0",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 15,
+            "data2": 0.016666,
+            "data3": 0.161172161,
+            "data0": 220,            
+            "data4": 10,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "electric-bike": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2*data3*data0*data4",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 20,
+            "data2": 0.016666,
+            "data3": 0.001,
+            "data0": 178,       
+            "data4": 220,
+            "data5": 0.25,
+            "data6": 0.25
+        }
+    },
+    "electric-car": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2*data3",
+            "kw": "set*data1*data3*data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 7.2,
+            "data2": 2.47,
+            "data3": 0.01,
+            "data4": 10,
+            "data5": 10,
+            "data6": 0.25
+        }
+    },
+    "electricity": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "kw": "set/data1*data2",
+            "co2": "kw*data3",            
+            "participation": "kw*data4"
+        },
+        "Constants": {
+            "data1": 0.27,
+            "data2": 12,
+            "data3": 0.5,
+            "data4": 0.5,
+            "data5": 0,
+            "data6": 0
+        }
+    },
+    "heating": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+	        "kw": "set*data1/data2",
+            "co2": "kw*data3*data4",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 12,
+            "data2": 0.1,
+            "data3": 275,
+            "data4": 0.001,
+            "data5": 10,
+            "data6": 0.25
+        }
+    },
+    "mortgage-rent": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.09375,
+            "data2": 12,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "green-power": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "kw": "set*data1/data2",
+            "co2": "kw*data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 12,
+            "data2": 0.27,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "wood-solar": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2",
+            "kw": "set*data3",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 275,
+            "data2": 0.001,
+            "data3": 1,
+            "data4": 0,
+            "data5": 0,
+            "data6": 0.25
+        }
+    },
+    "home-insulation": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+	        "kw": "set*data1/data2",
+            "co2": "kw*data3*data4",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 12,
+            "data2": 0.1,
+            "data3": 275,
+            "data4": 0.001,
+            "data5": 0,
+            "data6": 0.25
+        }
+    },
+    "food": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.1686,
+            "data2": 52,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "clothes-shoes": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.1686,
+            "data2": 0,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "paper-media-books": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.310768,
+            "data2": 0,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "electronic-others": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.1686,
+            "data2": 0,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "regional-seasonal-food": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.1686,
+            "data2": 52,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "organic-food": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.1686,
+            "data2": 52,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "second-hand-stuff": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.1686,
+            "data2": 0,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "ebooks-epapers": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2*data3*data4*data0",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 1,
+            "data2": 2,
+            "data3": 0.310768,
+            "data4": 0.0666,
+            "data0": 365,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "social-networks-internet": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2*data3*data4",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.2,
+            "data2": 3600,
+            "data3": 365,
+            "data4": 0.001,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "watch-tv": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "kw": "set*data1*data2*data3",
+            "co2": "kw*data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 100,
+            "data2": 365,
+            "data3": 0.001,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "hang-out": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "kw": "set*data1*data2*data3",
+            "co2": "kw*data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 50,
+            "data2": 52,
+            "data3": 0.001,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "cafes-restaurants-hotels": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.1686,
+            "data2": 12,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "birthday-parties-events": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.1686,
+            "data2": 0,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "cinema": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 0.1686,
+            "data2": 12,
+            "data3": 0,
+            "data4": 0,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    },
+    "workout-sports": {
+        "Input": {
+            "set": 0
+        },
+        "Outputs": {
+            "co2": "set*data1*data2*data3*data4",
+            "kw": "co2/data5",
+            "participation": "kw*data6"
+        },
+        "Constants": {
+            "data1": 1.4,
+            "data2": 52,
+            "data3": 60,
+            "data4": 0.001,
+            "data5": 0.5,
+            "data6": 0.25
+        }
+    }
+
+}

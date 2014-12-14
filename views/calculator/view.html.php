@@ -17,86 +17,26 @@ jimport('joomla.application.component.view');
  */
 class Co2ViewCalculator extends JViewLegacy {
 
-    protected $state;
-    protected $item;
-    protected $form;
-    protected $params;
-
     /**
      * Display the view
      */
     public function display($tpl = null) {
 
         $app = JFactory::getApplication();
+        $doc = JFactory::getDocument();
         $user = JFactory::getUser();
 
-        $this->state = $this->get('State');
-        
-        $this->params = $app->getParams('com_co2');
+        // Add CSS file
+        $doc->addStyleSheet(COMPONENT_URL . "assets/css/mb.slider.css");
+        $doc->addStyleSheet(COMPONENT_URL . "assets/css/calculator.css");
 
-        if (!empty($this->item)) {
-            
-        }
-
-
-        // Check for errors.
-        if (count($errors = $this->get('Errors'))) {
-            throw new Exception(implode("\n", $errors));
-        }
-
-        
-
-        if ($this->_layout == 'edit') {
-
-            $authorised = $user->authorise('core.create', 'com_co2');
-
-            if ($authorised !== true) {
-                throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
-            }
-        }
-
-        $this->_prepareDocument();
+        // Add JS file
+        $doc->addScript(COMPONENT_URL . "assets/js/jquery.js");
+        $doc->addScript(COMPONENT_URL . "assets/js/jquery.metadata.js");
+        $doc->addScript(COMPONENT_URL . "assets/js/jquery.mb.slider.js");
+        $doc->addScript(COMPONENT_URL . "assets/js/calculator.js");
 
         parent::display($tpl);
-    }
-
-    /**
-     * Prepares the document
-     */
-    protected function _prepareDocument() {
-        $app = JFactory::getApplication();
-        $menus = $app->getMenu();
-        $title = null;
-
-        // Because the application sets a default page title,
-        // we need to get it from the menu item itself
-        $menu = $menus->getActive();
-        if ($menu) {
-            $this->params->def('page_heading', $this->params->get('page_title', $menu->title));
-        } else {
-            $this->params->def('page_heading', JText::_('COM_CO2_DEFAULT_PAGE_TITLE'));
-        }
-        $title = $this->params->get('page_title', '');
-        if (empty($title)) {
-            $title = $app->getCfg('sitename');
-        } elseif ($app->getCfg('sitename_pagetitles', 0) == 1) {
-            $title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $title);
-        } elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
-            $title = JText::sprintf('JPAGETITLE', $title, $app->getCfg('sitename'));
-        }
-        $this->document->setTitle($title);
-
-        if ($this->params->get('menu-meta_description')) {
-            $this->document->setDescription($this->params->get('menu-meta_description'));
-        }
-
-        if ($this->params->get('menu-meta_keywords')) {
-            $this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
-        }
-
-        if ($this->params->get('robots')) {
-            $this->document->setMetadata('robots', $this->params->get('robots'));
-        }
     }
 
 }

@@ -12,6 +12,9 @@ defined('_JEXEC') or die;
 // Include dependancies
 jimport('joomla.application.component.controller');
 
+// Kossa
+define("COMPONENT_URL", JURI::root() . "components/com_co2/");
+
 // Execute the task.
 $controller	= JControllerLegacy::getInstance('Co2');
 $controller->execute(JFactory::getApplication()->input->get('task'));
