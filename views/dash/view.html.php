@@ -15,12 +15,18 @@ jimport('joomla.application.component.view');
 /**
  * View to edit
  */
-class Co2ViewCalculator extends JViewLegacy {
+class Co2ViewDash extends JViewLegacy {
 
     /**
      * Display the view
      */
     public function display($tpl = null) {
+
+        $app = JFactory::getApplication();
+        $user_id = JFactory::getUser()->id;
+
+        $model   = JModelLegacy::getInstance('Calculator', 'Co2Model');
+        var_dump($model->getCurrentYear($user_id));
 
         parent::display($tpl);
     }

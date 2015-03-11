@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @version     1.0.0
  * @package     com_co2
@@ -7,22 +6,11 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  * @author      Kouceyla Hadji <hadjikouceyla@gmail.com> - http://www.behance.net/kossa
  */
-// No direct access
+// no direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.view');
 
-/**
- * View to edit
- */
-class Co2ViewCalculator extends JViewLegacy {
 
-    /**
-     * Display the view
-     */
-    public function display($tpl = null) {
+?>
 
-        parent::display($tpl);
-    }
-
-}
+<h1>Dashboard</h1>

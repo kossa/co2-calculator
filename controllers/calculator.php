@@ -17,123 +17,56 @@ require_once JPATH_COMPONENT . '/controller.php';
  */
 class Co2ControllerCalculator extends Co2Controller {
 
-    /**
-     * Method to check out an item for editing and redirect to the edit form.
-     *
-     * @since	1.6
-     */
-    public function edit() {
-        $app = JFactory::getApplication();
+    private $urlCalculator = 'index.php?option=com_co2&view=calculator&Itemid=102';
 
-        // Get the previous edit id (if any) and the current edit id.
-        $previousId = (int) $app->getUserState('com_co2.edit.calculator.id');
-        $editId = JFactory::getApplication()->input->getInt('id', null, 'array');
+    
+    /*
+    |------------------------------------------------------------------------------------
+    | Save new DATA
+    |------------------------------------------------------------------------------------
+    */
+    public function save()
+    {
+        $app             = JFactory::getApplication();
+        $user_id         = JFactory::getUser()->id;
+        $jinput          = $app->input;
+        
+        $object          = new stdClass();
+        $object->user_id = $user_id;
+        $object->year    = $jinput->get('year','', 'STRING');
+        $object->data    = json_encode($jinput->get('data','', 'ARRAY'));
+        $object->date    = date('Y-m-d h:i:s');
+        
+        // Get Model and save
+        $model = $this->getModel('Calculator');
 
-        // Set the user id for the user to edit in the session.
-        $app->setUserState('com_co2.edit.calculator.id', $editId);
-
-        // Get the model.
-        $model = $this->getModel('Calculator', 'Co2Model');
-
-        // Check out the item
-        if ($editId) {
-            $model->checkout($editId);
+        $old = $model->getDataYear($user_id, $object->year);
+        
+        if($old){ // Exists already => updating
+            $object->id = $old[0]->id;
+            $model->updateData($object);
+        }else{// Insert new one
+            $model->save($object);
         }
 
-        // Check in the previous user.
-        if ($previousId && $previousId !== $editId) {
-            $model->checkin($previousId);
-        }
-
-        // Redirect to the edit screen.
-        $this->setRedirect(JRoute::_('index.php?option=com_co2&view=calculatorform&layout=edit', false));
+        $app->redirect($this->urlCalculator, 'Registered with success', 'success');
+        
+        
     }
 
-    /**
-     * Method to save a user's profile data.
-     *
-     * @return	void
-     * @since	1.6
-     */
-    public function publish() {
-        // Initialise variables.
-        $app = JFactory::getApplication();
+    /*
+    |------------------------------------------------------------------------------------
+    | Just for testing 
+    |------------------------------------------------------------------------------------
+    */
+    public function test()
+    {
+        $model = $this->getModel('Calculator');
 
-        //Checking if the user can remove object
-        $user = JFactory::getUser();
-        if ($user->authorise('core.edit', 'com_co2') || $user->authorise('core.edit.state', 'com_co2')) {
-            $model = $this->getModel('Calculator', 'Co2Model');
-
-            // Get the user data.
-            $id = $app->input->getInt('id');
-            $state = $app->input->getInt('state');
-
-            // Attempt to save the data.
-            $return = $model->publish($id, $state);
-
-            // Check for errors.
-            if ($return === false) {
-                $this->setMessage(JText::sprintf('Save failed: %s', $model->getError()), 'warning');
-            }
-
-            // Clear the profile id from the session.
-            $app->setUserState('com_co2.edit.calculator.id', null);
-
-            // Flush the data from the session.
-            $app->setUserState('com_co2.edit.calculator.data', null);
-
-            // Redirect to the list screen.
-            $this->setMessage(JText::_('COM_CO2_ITEM_SAVED_SUCCESSFULLY'));
-            $menu = & JSite::getMenu();
-            $item = $menu->getActive();
-            $this->setRedirect(JRoute::_($item->link, false));
-        } else {
-            throw new Exception(500);
+        if($model->getDataYear(673, 2010)){
+            echo "yes";
         }
     }
-
-    public function remove() {
-
-        // Initialise variables.
-        $app = JFactory::getApplication();
-
-        //Checking if the user can remove object
-        $user = JFactory::getUser();
-        if ($user->authorise($user->authorise('core.delete', 'com_co2'))) {
-            $model = $this->getModel('Calculator', 'Co2Model');
-
-            // Get the user data.
-            $id = $app->input->getInt('id', 0);
-
-            // Attempt to save the data.
-            $return = $model->delete($id);
-
-
-            // Check for errors.
-            if ($return === false) {
-                $this->setMessage(JText::sprintf('Delete failed', $model->getError()), 'warning');
-            } else {
-                // Check in the profile.
-                if ($return) {
-                    $model->checkin($return);
-                }
-
-                // Clear the profile id from the session.
-                $app->setUserState('com_co2.edit.calculator.id', null);
-
-                // Flush the data from the session.
-                $app->setUserState('com_co2.edit.calculator.data', null);
-
-                $this->setMessage(JText::_('COM_CO2_ITEM_DELETED_SUCCESSFULLY'));
-            }
-
-            // Redirect to the list screen.
-            $menu = & JSite::getMenu();
-            $item = $menu->getActive();
-            $this->setRedirect(JRoute::_($item->link, false));
-        } else {
-            throw new Exception(500);
-        }
-    }
+    
 
 }
