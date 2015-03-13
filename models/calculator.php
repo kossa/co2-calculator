@@ -43,7 +43,7 @@ class Co2ModelCalculator extends JModelItem {
     | Get Data by one year, by default the current year
     |------------------------------------------------------------------------------------
     */
-    public function getDataYear($id = 0, $year)
+    public function getDataYear($id = 0, $year = 0)
     {
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);        
@@ -58,6 +58,11 @@ class Co2ModelCalculator extends JModelItem {
         return $db->loadObjectList();
     }
 
+    /*
+    |------------------------------------------------------------------------------------
+    | Get All data by user ID
+    |------------------------------------------------------------------------------------
+    */
     public function getAllData($id = 0)
     {
         $db = JFactory::getDBO();
@@ -65,7 +70,8 @@ class Co2ModelCalculator extends JModelItem {
         $query
             ->select('*')
             ->from($db->quoteName('#__co2_users'))
-            ->where($db->quoteName('user_id') . ' = '. $id);
+            ->where($db->quoteName('user_id') . ' = '. $id)
+            ->order($db->quoteName('year'));
         
         $db->setQuery($query);
         return $db->loadObjectList();

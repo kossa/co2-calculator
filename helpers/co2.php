@@ -11,4 +11,24 @@ defined('_JEXEC') or die;
 
 class Co2FrontendHelper {
     
+    /*
+    |------------------------------------------------------------------------------------
+    | Load JS of Chart
+    |------------------------------------------------------------------------------------
+    */
+    public static function loadChartFiles()
+    {
+        echo '<script src="' . COMPONENT_URL . 'assets/js/jquery.js"></script>';
+        echo '<script src="' . COMPONENT_URL . 'assets/js/chart/globalize.min.js"></script>';
+        echo '<script src="' . COMPONENT_URL . 'assets/js/chart/dx.chartjs.js"></script>';
+    }
+
+
+    /*
+    |------------------------------------------------------------------------------------
+    | Get co2 from brut data
+    |------------------------------------------------------------------------------------
+    */
+    
+
 }

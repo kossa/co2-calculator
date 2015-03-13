@@ -22,13 +22,20 @@ class Co2ViewDash extends JViewLegacy {
      */
     public function display($tpl = null) {
 
-        $app = JFactory::getApplication();
+        // Load Chart JS
+        Co2FrontendHelper::loadChartFiles();
+
+        $app     = JFactory::getApplication();
         $user_id = JFactory::getUser()->id;
-
+        
         $model   = JModelLegacy::getInstance('Calculator', 'Co2Model');
-        var_dump($model->getCurrentYear($user_id));
+        $this->allData = $model->getAllData($user_id);
 
-        parent::display($tpl);
+        echo $this->loadTemplate('zero_emission_account');
+        echo $this->loadTemplate('carbon_footprint');
+        echo $this->loadTemplate('lifestyle');
+
+        //parent::display($tpl);
     }
 
 }

@@ -4,8 +4,8 @@
 (function($){
   
     // Load json file
-    //$.getJSON("http://zeroemissioncalculator.com/components/com_co2/assets/calculator.json", function(json) {
-    $.getJSON("http://kossa.local/zeroemissioncalculator/components/com_co2/assets/calculator.json", function(json) {
+    $.getJSON("http://zeroemissioncalculator.com/components/com_co2/assets/calculator.json", function(json) {
+    //$.getJSON("http://kossa.local/zeroemissioncalculator/components/com_co2/assets/calculator.json", function(json) {
       window.calcOBJ = json;
     });
 

@@ -14,21 +14,25 @@ $Datas = $this->allData;
 
 ?>
 
-<h1>Dashboard</h1>
 
-    <div id="line-chart" style="height:250px;"></div>
-
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">My zero emission account</h3>
+  </div>
+  <div class="panel-body">
+    <div id="zero-emission-account" style="height:250px;"></div>
+  </div>
+</div>
 
 <script type="text/javascript">
-    $.noConflict();
         jQuery(document).ready(function($) {
-        $("#line-chart").dxChart({
+        $("#zero-emission-account").dxChart({
             dataSource: [
             <?php foreach ($Datas as $data): ?>
                 { 
                     year: <?php echo $data->year ?>, 
-                    europe: <?php echo json_decode($data->data)->{'total-co2'} ?>, 
-                    americas: <?php echo json_decode($data->data)->{'total-green-co2'} ?>, 
+                    total_co2: <?php echo json_decode($data->data)->{'total-co2'} ?>, 
+                    total_green_co2: <?php echo json_decode($data->data)->{'total-green-co2'} ?>, 
                 },
             <?php endforeach ?>
             ],
@@ -36,8 +40,8 @@ $Datas = $this->allData;
                 argumentField: "year"
             },
             series: [
-                { valueField: "europe", name: "total-co2", color: "#3498DB" },
-                { valueField: "americas", name: "total-green-co2", color: "#6AB100" },
+                { valueField: "total_co2", name: "Total-co2", color: "#3498DB" },
+                { valueField: "total_green_co2", name: "Total-green-co2", color: "#6AB100" },
             ],
             tooltip:{
                 enabled: true,
