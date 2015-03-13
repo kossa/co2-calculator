@@ -11,6 +11,13 @@ defined('_JEXEC') or die;
 
 $Datas = $this->allData;
 //var_dump(json_decode($Datas[0]->data)->{'total-co2'});
+foreach ($Datas as $data) {
+    if ($data->year == date('Y')) { // This is the current year
+        $current_data = json_decode($data->data);
+        break;
+    }
+}
+$current_data = (!isset($current_data)) ? json_decode($data->data) : $current_data ;
 
 ?>
 
@@ -27,35 +34,53 @@ $Datas = $this->allData;
 <script type="text/javascript">
         jQuery(document).ready(function($) {
         $("#carbon-footprint").dxChart({
-            dataSource: [
-            <?php foreach ($Datas as $data): ?>
-                { 
-                    year: <?php echo $data->year ?>, 
-                    total_co2: <?php echo json_decode($data->data)->{'total-co2'} ?>, 
-                    total_green_co2: <?php echo json_decode($data->data)->{'total-green-co2'} ?>, 
+                dataSource: [
+                    { 
+                        state: "My Travel", 
+                        co2: <?php echo $current_data->{'travel-co2'} ?>, 
+                        co2_green: <?php echo $current_data->{'travel-co2'} ?>
+                    },
+                    { 
+                        state: "My Home", 
+                        co2: <?php echo $current_data->{'home-co2'} ?>, 
+                        co2_green: <?php echo $current_data->{'home-co2'} ?>
+                    },
+                    { 
+                        state: "My Consume", 
+                        co2: <?php echo $current_data->{'consume-co2'} ?>, 
+                        co2_green: <?php echo $current_data->{'consume-co2'} ?>
+                    },
+                    { 
+                        state: "My Social", 
+                        co2: <?php echo $current_data->{'social-co2'} ?>, 
+                        co2_green: <?php echo $current_data->{'social-co2'} ?>
+                    },
+
+                ],
+                commonSeriesSettings: {
+                    argumentField: "state",
+                    type: "stackedBar"
                 },
-            <?php endforeach ?>
-            ],
-            commonSeriesSettings: {
-                argumentField: "year"
-            },
-            series: [
-                { valueField: "total_co2", name: "Total-co2", color: "#3498DB" },
-                { valueField: "total_green_co2", name: "Total-green-co2", color: "#6AB100" },
-            ],
-            tooltip:{
-                enabled: true,
-                font: { size: 16 }
-            },
-            legend: {
-                visible: true
-            },
-            valueAxis:{
-                grid:{
-                    color: "#9D9EA5",
-                    width: 0.1
-                    }
-            }
+                series: [
+                    { valueField: "co2", name: "CO2",color: '#3498DB' },
+                    { valueField: "co2_green", name: "CO2 green",color: '#6AB100' },
+                ],
+                legend: {
+                    visible: true
+                },
+                valueAxis:{
+                    grid:{
+                        color: '#9D9EA5',
+                        width: 0.1
+                        }
+                },
+                tooltip: {
+                    enabled: true,
+                    customizeText: function () {
+                        return this.seriesName + " : " + this.valueText;
+                    },
+                    font: { size: 16 }
+                }
         });
     });
 </script>
