@@ -31,6 +31,15 @@ class Co2ViewDash extends JViewLegacy {
         $model   = JModelLegacy::getInstance('Calculator', 'Co2Model');
         $this->allData = $model->getAllData($user_id);
 
+        foreach ($this->allData as $data) {
+            if ($data->year == date('Y')) { // This is the current year
+                $current_data = json_decode($data->data);
+                break;
+            }
+        }
+        $this->current_data = (!isset($current_data)) ? json_decode($data->data) : $current_data ;
+
+
         echo $this->loadTemplate('zero_emission_account');
         echo $this->loadTemplate('carbon_footprint');
         echo $this->loadTemplate('lifestyle');

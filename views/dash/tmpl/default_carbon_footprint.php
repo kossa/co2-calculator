@@ -11,14 +11,8 @@ defined('_JEXEC') or die;
 
 $Datas = $this->allData;
 //var_dump(json_decode($Datas[0]->data)->{'total-co2'});
-foreach ($Datas as $data) {
-    if ($data->year == date('Y')) { // This is the current year
-        $current_data = json_decode($data->data);
-        break;
-    }
-}
-$current_data = (!isset($current_data)) ? json_decode($data->data) : $current_data ;
 
+$current_data = $this->current_data;
 ?>
 
 

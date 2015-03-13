@@ -17,7 +17,7 @@ $Datas = $this->allData;
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">My zero emission account</h3>
+    <h3 class="panel-title">My zero emission account(€)</h3>
   </div>
   <div class="panel-body">
     <div id="zero-emission-account" style="height:250px;"></div>
@@ -31,8 +31,8 @@ $Datas = $this->allData;
             <?php foreach ($Datas as $data): ?>
                 { 
                     year: <?php echo $data->year ?>, 
-                    total_co2: <?php echo json_decode($data->data)->{'total-co2'} ?>, 
-                    total_green_co2: <?php echo json_decode($data->data)->{'total-green-co2'} ?>, 
+                    total_co2: <?php echo json_decode($data->data)->{'total-euro'} ?>, 
+                    total_green_co2: <?php echo json_decode($data->data)->{'total-green-euro'} ?>, 
                 },
             <?php endforeach ?>
             ],
@@ -45,7 +45,10 @@ $Datas = $this->allData;
             ],
             tooltip:{
                 enabled: true,
-                font: { size: 16 }
+                font: { size: 16 },
+                customizeText: function () {
+                    return this.seriesName + " : " + this.valueText + "€";
+                },
             },
             legend: {
                 visible: true

@@ -12,6 +12,8 @@ defined('_JEXEC') or die;
 $Datas = $this->allData;
 //var_dump(json_decode($Datas[0]->data)->{'total-co2'});
 
+$current_data = $this->current_data;
+
 ?>
 
 
@@ -25,37 +27,37 @@ $Datas = $this->allData;
 </div>
 
 <script type="text/javascript">
-        jQuery(document).ready(function($) {
-        $("#lifestyle").dxChart({
+    jQuery(document).ready(function($) {
+        $("#lifestyle").dxPieChart({
             dataSource: [
-            <?php foreach ($Datas as $data): ?>
-                { 
-                    year: <?php echo $data->year ?>, 
-                    total_co2: <?php echo json_decode($data->data)->{'total-co2'} ?>, 
-                    total_green_co2: <?php echo json_decode($data->data)->{'total-green-co2'} ?>, 
-                },
-            <?php endforeach ?>
+                { country: "My Travel", medals: <?php echo $current_data->{'travel-co2'} + $current_data->{'travel-green-co2'} ?> },
+                { country: "My Social", medals: <?php echo $current_data->{'social-co2'} + $current_data->{'social-green-co2'} ?> },
+                { country: "My Home", medals: <?php echo $current_data->{'home-co2'} + $current_data->{'home-green-co2'} ?> },
+                { country: "My Consume", medals: <?php echo $current_data->{'consume-co2'} + $current_data->{'consume-green-co2'} ?> },
+
             ],
-            commonSeriesSettings: {
-                argumentField: "year"
-            },
-            series: [
-                { valueField: "total_co2", name: "Total-co2", color: "#3498DB" },
-                { valueField: "total_green_co2", name: "Total-green-co2", color: "#6AB100" },
-            ],
-            tooltip:{
-                enabled: true,
-                font: { size: 16 }
-            },
             legend: {
                 visible: true
             },
-            valueAxis:{
-                grid:{
-                    color: "#9D9EA5",
-                    width: 0.1
+            palette: ["#A49BC4", "#70BA63", "#E9573F", "#4DC5F9", "#EDD655", "#4ECDC4"],
+            series: [{
+                argumentField: "country",
+                valueField: "medals",
+                label: {
+                    visible: true,
+                    font: {
+                        size: 12
+                    },
+                    connector: {
+                        visible: true,
+                        width: 0.5
+                    },
+                    position: "columns",
+                    customizeText: function(arg) {
+                        return arg.valueText + " ( " + arg.percentText + ")";
                     }
-            }
+                }
+            }]
         });
     });
 </script>
