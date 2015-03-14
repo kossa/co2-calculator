@@ -24,6 +24,11 @@ class Co2Controller extends JControllerLegacy {
      * @since	1.5
      */
     public function display($cachable = false, $urlparams = false) {
+
+        if(!JFactory::getUser()->id){
+            JFactory::getApplication()->redirect('index.php?option=com_users&view=login');
+        }
+
         require_once JPATH_COMPONENT . '/helpers/co2.php';
 
         $view = JFactory::getApplication()->input->getCmd('view', 'calculators');

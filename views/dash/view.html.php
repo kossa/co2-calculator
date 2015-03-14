@@ -40,11 +40,11 @@ class Co2ViewDash extends JViewLegacy {
         $this->current_data = (!isset($current_data)) ? json_decode($data->data) : $current_data ;
 
 
+        parent::display($tpl);
         echo $this->loadTemplate('zero_emission_account');
         echo $this->loadTemplate('carbon_footprint');
         echo $this->loadTemplate('lifestyle');
 
-        //parent::display($tpl);
     }
 
 }

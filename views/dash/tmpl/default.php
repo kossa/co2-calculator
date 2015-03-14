@@ -9,26 +9,42 @@
 // no direct access
 defined('_JEXEC') or die;
 
+
 $Datas = $this->allData;
 //var_dump(json_decode($Datas[0]->data)->{'total-co2'});
 
+$current_data = $this->current_data;
+
+
 ?>
 
-<h1>Dashboard</h1>
+<form action="index.php?option=com_content&view=article&id=3&Itemid=113" method="POST">
+    <input type="hidden" name="price" value="<?php echo $current_data->{'total-euro'} + $current_data->{'total-green-euro'}  ?>">
+    <input type="submit" name="" value="Buy certicate" class="btn btn-success pull-right">
+</form>
 
-    <div id="line-chart" style="height:250px;"></div>
-
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">My zero emission account (€) 
+        <span class="pull-right">
+            <?php echo $current_data->{'total-euro'} + $current_data->{'total-green-euro'} ?> €
+        </span>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div id="zero-emission-account" style="height:250px;"></div>
+  </div>
+</div>
 
 <script type="text/javascript">
-    $.noConflict();
         jQuery(document).ready(function($) {
-        $("#line-chart").dxChart({
+        $("#zero-emission-account").dxChart({
             dataSource: [
             <?php foreach ($Datas as $data): ?>
                 { 
                     year: <?php echo $data->year ?>, 
-                    europe: <?php echo json_decode($data->data)->{'total-co2'} ?>, 
-                    americas: <?php echo json_decode($data->data)->{'total-green-co2'} ?>, 
+                    total_co2: <?php echo json_decode($data->data)->{'total-euro'} ?>, 
+                    total_green_co2: <?php echo json_decode($data->data)->{'total-green-euro'} ?>, 
                 },
             <?php endforeach ?>
             ],
@@ -36,15 +52,21 @@ $Datas = $this->allData;
                 argumentField: "year"
             },
             series: [
-                { valueField: "europe", name: "total-co2", color: "#3498DB" },
-                { valueField: "americas", name: "total-green-co2", color: "#6AB100" },
+                { valueField: "total_co2", name: "Total-co2", color: "#4DC5F9" },
+                { valueField: "total_green_co2", name: "Total-green-co2", color: "#70BA63" },
             ],
             tooltip:{
                 enabled: true,
-                font: { size: 16 }
+                font: { size: 16 },
+                customizeText: function () {
+                    return this.seriesName + " : " + this.valueText + "€";
+                },
             },
             legend: {
                 visible: true
+            },
+            argumentAxis: {
+                type: 'discrete',
             },
             valueAxis:{
                 grid:{
